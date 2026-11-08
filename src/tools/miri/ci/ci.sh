@@ -179,6 +179,7 @@ case $HOST_TARGET in
     TEST_TARGET=wasm32-unknown-unknown run_tests_minimal no_std empty_main wasm # this target doesn't really have std
     TEST_TARGET=thumbv7em-none-eabihf  run_tests_minimal no_std
     TEST_TARGET=x86_64-unknown-netbsd run_tests_minimal hello libc/env.rs libc/misc.rs
+    TEST_TARGET=x86_64-unknown-openbsd run_tests_minimal hello libc/env.rs libc/misc.rs
     ;;
   aarch64-apple-darwin)
     TEST_TIER=0 run_tests # macOS, aarch64 extended tests

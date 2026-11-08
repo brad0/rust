@@ -7,7 +7,7 @@ use std::mem::transmute;
 fn test_errno() {
     #[cfg(any(target_os = "illumos", target_os = "solaris"))]
     use libc::___errno as __errno_location;
-    #[cfg(any(target_os = "android", target_os = "netbsd"))]
+    #[cfg(any(target_os = "android", target_os = "netbsd", target_os = "openbsd"))]
     use libc::__errno as __errno_location;
     #[cfg(target_os = "linux")]
     use libc::__errno_location;

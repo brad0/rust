@@ -19,6 +19,7 @@ mod linux;
 mod linux_like;
 mod macos;
 mod netbsd;
+mod openbsd;
 mod solarish;
 
 // All the Unix-specific extension traits, and some types needed elsewhere

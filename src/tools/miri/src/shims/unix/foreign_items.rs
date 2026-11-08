@@ -13,6 +13,7 @@ use self::shims::unix::freebsd::foreign_items as freebsd;
 use self::shims::unix::linux::foreign_items as linux;
 use self::shims::unix::macos::foreign_items as macos;
 use self::shims::unix::netbsd::foreign_items as netbsd;
+use self::shims::unix::openbsd::foreign_items as openbsd;
 use self::shims::unix::solarish::foreign_items as solarish;
 use crate::shims::alloc::EvalContextExt as _;
 use crate::shims::cpu_affinity::EvalContextExt as _;
@@ -44,6 +45,7 @@ pub fn is_dyn_sym(name: &str, target: &Target) -> bool {
                 Os::MacOs => macos::is_dyn_sym(name),
                 Os::Solaris | Os::Illumos => solarish::is_dyn_sym(name),
                 Os::NetBsd => netbsd::is_dyn_sym(name),
+                Os::OpenBsd => openbsd::is_dyn_sym(name),
                 _ => false,
             },
     }
@@ -1537,6 +1539,10 @@ pub trait EvalContextExt<'tcx>: crate::MiriInterpCxExt<'tcx> {
                         ),
                     Os::NetBsd =>
                         netbsd::EvalContextExt::emulate_foreign_item_inner(
+                            this, link_name, abi, args, dest,
+                        ),
+                    Os::OpenBsd =>
+                        openbsd::EvalContextExt::emulate_foreign_item_inner(
                             this, link_name, abi, args, dest,
                         ),
                     _ => interp_ok(EmulateItemResult::NotSupported),
